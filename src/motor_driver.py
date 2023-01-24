@@ -13,11 +13,9 @@ class MotorDriver:
         self.in1pin = in1pin
         self.in2pin = in2pin
         self.timer = timer
-        self.ch1 = self.timer.channel(1, pyb.Timer.PWM, pin=self.in1pin)
-        self.ch2 = self.timer.channel(2, pyb.Timer.PWM, pin=self.in2pin)
         self.en_pin.high()
-        ch1.pulse_width_percent(0)
-        ch2.pulse_width_percent(0)
+        self.timer.channel(1, pyb.Timer.PWM, pin=self.in1pin).pulse_width_percent(0)
+        self.timer.channel(2, pyb.Timer.PWM, pin=self.in2pin).pulse_width_percent(0)
         print ("Creating a motor driver")
 
     def set_duty_cycle (self, level):
@@ -30,14 +28,14 @@ class MotorDriver:
                cycle of the voltage sent to the motor 
         """
         if(level > 0):
-            self.ch1.pulse_width_percent(level)
-            self.ch2.pulse_width_percent(0)
+            self.timer.channel(1, pyb.Timer.PWM, pin=self.in1pin).pulse_width_percent(level)
+            self.timer.channel(2, pyb.Timer.PWM, pin=self.in2pin).pulse_width_percent(0)
         elif(level < 0):
-            self.ch1.pulse_width_percent(0)
-            self.ch2.pulse_width_percent(level)
+            self.timer.channel(1, pyb.Timer.PWM, pin=self.in1pin).pulse_width_percent(0)
+            self.timer.channel(2, pyb.Timer.PWM, pin=self.in2pin).pulse_width_percent(level * -1)
         else:
-            self.ch1.pulse_width_percent(0)
-            self.ch2.pulse_width_percent(0)
+            self.timer.channel(1, pyb.Timer.PWM, pin=self.in1pin).pulse_width_percent(0)
+            self.timer.channel(2, pyb.Timer.PWM, pin=self.in2pin).pulse_width_percent(0)
         print (f"Setting duty cycle to {level}")
     
 if __name__ == "__main__":
