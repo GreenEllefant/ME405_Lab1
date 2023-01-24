@@ -43,7 +43,7 @@ if __name__ == "__main__":
     en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_PP)
     in1pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
     in2pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
-    tim = pyb.Timer(3, prescalar = 0 , preiod = 0xFFFF)
+    tim = pyb.Timer(3, prescaler = 0 , period = 0xFFFF)
     ch1 = tim.channel(1, pyb.Timer.PWM, pin=in1pin)
     ch2 = tim.channel(2, pyb.Timer.PWM, pin=in2pin)
     ch1.pulse_width_percent(0)
