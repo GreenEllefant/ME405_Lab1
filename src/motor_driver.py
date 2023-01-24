@@ -7,7 +7,10 @@ class MotorDriver:
         """! 
         Creates a motor driver by initializing GPIO
         pins and turning off the motor for safety. 
-        @param en_pin (There will be several pin parameters)
+        @param en_pin Encoder Pin for the Motor
+        @param in1pin First Interrput Channel for the Motor
+        @param in2pin Second Interrupt Channel for the Motor
+        @param timer Timer Channel for the Motor
         """
         self.en_pin = en_pin
         self.in1pin = in1pin
