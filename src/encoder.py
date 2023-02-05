@@ -6,6 +6,7 @@ This file contains code definitions for encoder behavior.
 @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import time
+import motor_driver
 
 def enc_read():
     pinB6= pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)            #set pinB6 to input
@@ -60,6 +61,12 @@ if __name__ == "__main__":
     en2_pin = pyb.Pin(pyb.Pin.board.PB7, pyb.Pin.IN)
     timer4 = pyb.Timer(4, prescaler=0, period=0xFFFF) 
     reader = Encoder_Reader(en1_pin, en2_pin, timer4)
+    en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
+    in1pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
+    in2pin = pyb.Pin(pyb.Pin.board.PB5, pyb.Pin.OUT_PP)
+    tim = pyb.Timer(3, prescaler = 0 , period = 0xFFFF)
+    moe = MotorDriver(en_pin, in1pin, in2pin, tim)
+    moe.set_duty_cycle(90)
     for i in range(0, 50):
         print(reader.read())
         time.sleep(0.1)

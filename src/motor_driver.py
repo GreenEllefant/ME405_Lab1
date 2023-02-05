@@ -1,3 +1,4 @@
+import encoder
 class MotorDriver:
     """! 
     This class implements a motor driver for an ME405 kit. 
